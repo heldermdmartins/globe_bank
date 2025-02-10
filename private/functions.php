@@ -18,6 +18,12 @@ function raw_u($string = "")
     return rawurlencode($string);
 }
 
+/**
+ * h
+ * htmlspecialchars — Convert special characters to HTML entities
+ * @param  mixed $string
+ * @return void
+ */
 function h($string = "")
 {
     return htmlspecialchars($string);
