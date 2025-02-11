@@ -11,7 +11,6 @@ function find_all_subjects()
   confirm_result_set($result);
   return $result;
 }
-
 function find_subject_by_id($id)
 {
   global $db;
@@ -23,7 +22,6 @@ function find_subject_by_id($id)
   mysqli_free_result($result);
   return $subject; // Return Assoc array
 }
-
 function inser_subject($menu_name, $position, $visible)
 {
   global $db;
@@ -46,6 +44,29 @@ function inser_subject($menu_name, $position, $visible)
     exit;
   }
 }
+function update_subject($subject)
+{
+  global $db;
+
+  $sql = "UPDATE subjects SET ";
+  $sql .= "menu_name='" . $subject['menu_name'] . "', ";
+  $sql .= "position='" . $subject['position'] . "', ";
+  $sql .= "visible='" . $subject['visible'] . "' ";
+  $sql .= "WHERE id='" . $subject['id'] . "' ";
+  $sql .= "LIMIT 1";
+
+  $result = mysqli_query($db, $sql);
+  // For UPDATE statements, $result is true/false
+  if ($result) {
+    return true;
+  } else {
+    // UPDATE failed
+    echo mysqli_error($db);
+    db_disconnect($db);
+    exit;
+  }
+}
+
 function find_all_pages()
 {
   global $db;
