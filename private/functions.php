@@ -29,6 +29,11 @@ function h($string = "")
     return htmlspecialchars($string);
 }
 
+/**
+ * error_404
+ *
+ * @return void
+ */
 function error_404()
 {
     header($_SERVER["SERVER_PROTOCOL"] . " 404 Not Found");
@@ -40,6 +45,13 @@ function error_500()
     header($_SERVER["SERVER_PROTOCOL"] . " 500 Internal Server Error");
     exit();
 }
+
+/**
+ * redirect_to
+ *
+ * @param  mixed $location
+ * @return void
+ */
 function redirect_to($location)
 {
     header("Location: " . $location);
