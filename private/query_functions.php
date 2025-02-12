@@ -22,16 +22,16 @@ function find_subject_by_id($id)
   mysqli_free_result($result);
   return $subject; // Return Assoc array
 }
-function inser_subject($menu_name, $position, $visible)
+function inser_subject($subject)
 {
   global $db;
   $sql = "INSERT INTO subjects ";
   $sql .= "(menu_name, position, visible) ";
   $sql .= "VALUES (";
 
-  $sql .= "'" . $menu_name . "',";
-  $sql .= "'" . $position . "',";
-  $sql .= "'" . $visible . "'";
+  $sql .= "'" . $subject['$menu_name'] . "',";
+  $sql .= "'" . $subject['$position'] . "',";
+  $sql .= "'" . $subject['$visible'] . "'";
   $sql .= ")";
   $result = mysqli_query($db, $sql);
   // For INSERT statments , $result is true/false
