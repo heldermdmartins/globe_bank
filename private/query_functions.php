@@ -22,7 +22,7 @@ function find_subject_by_id($id)
   mysqli_free_result($result);
   return $subject; // Return Assoc array
 }
-function inser_subject($subject)
+function insert_subject($subject)
 {
   global $db;
   $sql = "INSERT INTO subjects ";
@@ -66,7 +66,25 @@ function update_subject($subject)
     exit;
   }
 }
+function delete_subject($id)
+{
+  global $db;
 
+  $sql = "DELETE FROM subjects ";
+  $sql .= "WHERE id='" . $id . "' ";
+  $sql .= "LIMIT 1";
+
+  $result = mysqli_query($db, $sql);
+  // For DELETE statements, $result is true/false
+  if ($result) {
+    return true;
+  } else {
+    // DELETE failed
+    echo mysqli_error($db);
+    db_disconnect($db);
+    exit;
+  }
+}
 function find_all_pages()
 {
   global $db;
