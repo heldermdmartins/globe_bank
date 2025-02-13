@@ -19,15 +19,15 @@ if (is_post_request()) {
 } else {
   // display the blank form
   $subject = [];
-  $subject_set = find_all_subjects();
-  $subject_count = mysqli_num_rows($subject_set) + 1;
-  mysqli_free_result($subject_set);
   $subject["menu_name"] = '';
-  $subject["position"] = $subject_count;
   $subject["visible"] = '';
 }
 
+$subject_set = find_all_subjects();
+$subject_count = mysqli_num_rows($subject_set) + 1;
+mysqli_free_result($subject_set);
 
+$subject["position"] = $subject_count;
 
 ?>
 
