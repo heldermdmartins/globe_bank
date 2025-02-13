@@ -5,6 +5,7 @@
 $id = $_GET['id'] ?? '1'; // PHP > 7.0
 
 $subject = find_subject_by_id($id);
+
 ?>
 
 <?php $page_title = 'Show Subject'; ?>
@@ -32,7 +33,6 @@ $subject = find_subject_by_id($id);
         <dd><?php echo $subject['visible'] == '1' ? 'true' : 'false'; ?></dd>
       </dl>
     </div>
-
 
   </div>
 
