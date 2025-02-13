@@ -20,6 +20,7 @@ if (is_post_request()) {
   // display the blank form
   $subject = [];
   $subject["menu_name"] = '';
+  $subject["position"] = '';
   $subject["visible"] = '';
 }
 
