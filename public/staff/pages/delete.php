@@ -2,16 +2,16 @@
 
 require_once('../../../private/initialize.php');
 
-if(!isset($_GET['id'])) {
+if (!isset($_GET['id'])) {
   redirect_to(url_for('/staff/pages/index.php'));
 }
 $id = $_GET['id'];
 
-if(is_post_request()) {
+if (is_post_request()) {
 
   $result = delete_page($id);
+  $_SESSION['message'] = 'The page was deleted successfully.';
   redirect_to(url_for('/staff/pages/index.php'));
-
 } else {
   $page = find_page_by_id($id);
 }

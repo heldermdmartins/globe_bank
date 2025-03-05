@@ -2,7 +2,7 @@
 
 require_once('../../../private/initialize.php');
 
-if(is_post_request()) {
+if (is_post_request()) {
 
   $page = [];
   $page['subject_id'] = $_POST['subject_id'] ?? '';
@@ -12,13 +12,13 @@ if(is_post_request()) {
   $page['content'] = $_POST['content'] ?? '';
 
   $result = insert_page($page);
-  if($result === true) {
+  if ($result === true) {
     $new_id = mysqli_insert_id($db);
+    $_SESSION['message'] = 'The page was created successfully.';
     redirect_to(url_for('/staff/pages/show.php?id=' . $new_id));
   } else {
     $errors = $result;
   }
-
 } else {
 
   $page = [];
@@ -27,7 +27,6 @@ if(is_post_request()) {
   $page['position'] = '';
   $page['visible'] = '';
   $page['content'] = '';
-
 }
 
 $page_set = find_all_pages();
@@ -53,17 +52,17 @@ mysqli_free_result($page_set);
         <dt>Subject</dt>
         <dd>
           <select name="subject_id">
-          <?php
+            <?php
             $subject_set = find_all_subjects();
-            while($subject = mysqli_fetch_assoc($subject_set)) {
+            while ($subject = mysqli_fetch_assoc($subject_set)) {
               echo "<option value=\"" . h($subject['id']) . "\"";
-              if($page["subject_id"] == $subject['id']) {
+              if ($page["subject_id"] == $subject['id']) {
                 echo " selected";
               }
               echo ">" . h($subject['menu_name']) . "</option>";
             }
             mysqli_free_result($subject_set);
-          ?>
+            ?>
           </select>
         </dd>
       </dl>
@@ -76,13 +75,13 @@ mysqli_free_result($page_set);
         <dd>
           <select name="position">
             <?php
-              for($i=1; $i <= $page_count; $i++) {
-                echo "<option value=\"{$i}\"";
-                if($page["position"] == $i) {
-                  echo " selected";
-                }
-                echo ">{$i}</option>";
+            for ($i = 1; $i <= $page_count; $i++) {
+              echo "<option value=\"{$i}\"";
+              if ($page["position"] == $i) {
+                echo " selected";
               }
+              echo ">{$i}</option>";
+            }
             ?>
           </select>
         </dd>
@@ -91,7 +90,9 @@ mysqli_free_result($page_set);
         <dt>Visible</dt>
         <dd>
           <input type="hidden" name="visible" value="0" />
-          <input type="checkbox" name="visible" value="1"<?php if($page['visible'] == "1") { echo " checked"; } ?> />
+          <input type="checkbox" name="visible" value="1" <?php if ($page['visible'] == "1") {
+                                                            echo " checked";
+                                                          } ?> />
         </dd>
       </dl>
       <dl>
