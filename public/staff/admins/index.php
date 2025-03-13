@@ -1,7 +1,7 @@
 <?php
 
 require_once('../../../private/initialize.php');
-
+require_login();
 $admin_set = find_all_admins();
 
 ?>
@@ -29,7 +29,7 @@ $admin_set = find_all_admins();
         <th>&nbsp;</th>
       </tr>
 
-      <?php while($admin = mysqli_fetch_assoc($admin_set)) { ?>
+      <?php while ($admin = mysqli_fetch_assoc($admin_set)) { ?>
         <tr>
           <td><?php echo h($admin['id']); ?></td>
           <td><?php echo h($admin['first_name']); ?></td>
@@ -44,7 +44,7 @@ $admin_set = find_all_admins();
     </table>
 
     <?php
-      mysqli_free_result($admin_set);
+    mysqli_free_result($admin_set);
     ?>
   </div>
 
