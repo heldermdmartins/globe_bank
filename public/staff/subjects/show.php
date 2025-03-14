@@ -2,11 +2,13 @@
 
 <?php
 require_login();
+
 // $id = isset($_GET['id']) ? $_GET['id'] : '1';
 $id = $_GET['id'] ?? '1'; // PHP > 7.0
 
 $subject = find_subject_by_id($id);
 $page_set = find_pages_by_subject_id($id);
+
 ?>
 
 <?php $page_title = 'Show Subject'; ?>
@@ -36,17 +38,17 @@ $page_set = find_pages_by_subject_id($id);
     </div>
 
     <hr />
+
     <div class="pages listing">
-      <h1>Pages</h1>
+      <h2>Pages</h2>
 
       <div class="actions">
-        <a class="action" href="<?php echo url_for('/staff/pages/new.php'); ?>">Create New Page</a>
+        <a class="action" href="<?php echo url_for('/staff/pages/new.php?subject_id=' . h(u($subject['id']))); ?>">Create New Page</a>
       </div>
 
       <table class="list">
         <tr>
           <th>ID</th>
-
           <th>Position</th>
           <th>Visible</th>
           <th>Name</th>
@@ -55,7 +57,7 @@ $page_set = find_pages_by_subject_id($id);
           <th>&nbsp;</th>
         </tr>
 
-        <?php while ($page = mysqli_fetch_assoc($page_set)) { ?>
+        <?php while($page = mysqli_fetch_assoc($page_set)) { ?>
           <?php $subject = find_subject_by_id($page['subject_id']); ?>
           <tr>
             <td><?php echo h($page['id']); ?></td>
@@ -72,6 +74,9 @@ $page_set = find_pages_by_subject_id($id);
       <?php mysqli_free_result($page_set); ?>
 
     </div>
+
+
+
   </div>
 
 </div>
